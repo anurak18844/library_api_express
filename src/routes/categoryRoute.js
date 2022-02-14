@@ -7,10 +7,12 @@ app.get("/", categoryController.getCategories);
 
 app.get("/:id", categoryController.getCategoryById);
 
-app.post("/", categoryController.addCategory);
+app.get("/id/:id", categoryController.getCategoryByCategoryId);
 
-app.put("/:id", categoryController.editWholeCategory);
+app.post("/", auth,categoryController.addCategory);
 
-app.delete("/:id", categoryController.deleteCategory);
+app.put("/:id", auth,categoryController.editWholeCategory);
+
+app.delete("/:id", auth,categoryController.deleteCategory);
 
 module.exports = app;

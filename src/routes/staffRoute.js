@@ -7,12 +7,12 @@ app.get("/", staffController.getStaff);
 
 app.get("/:id",staffController.getStaffById);
 
-app.post("/register", staffController.register);
+app.post("/register", auth,staffController.register);
 
-// app.post("/login", staffController.login);
+app.post("/login", staffController.login);
 
-app.patch("/:id", staffController.editWholeStaff);
+app.patch("/:id", auth,staffController.editWholeStaff);
 
-app.delete("/:id", staffController.deleteStaff);
+app.delete("/:id", auth,staffController.deleteStaff);
 
 module.exports = app;

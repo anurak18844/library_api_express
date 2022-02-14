@@ -68,3 +68,13 @@ exports.deleteCategory = async (req, res)=>{
         });
     });
 }
+
+exports.getCategoryByCategoryId = async (req, res)=>{
+    Category.findOne({category_id: req.params.id})
+    .exec((err,data)=>{
+        res.status(200).json({
+            msg: "GET CATEGORY BY NAME",
+            data: data
+        });
+    });
+}

@@ -74,3 +74,51 @@ exports.deleteStaff = async (req,res)=>{
     });
 };
 
+exports.login = async (req, res)=>{
+    const login = {
+        staff_id: req.body.staff_id,
+        password: req.body.password
+    }
+    // console.log(login)
+    try {
+        let staff = await Staff.findOne({
+            staff_id: login.staff_id
+        });
+        // console.log(user);
+        //check if user exit
+        if (!staff) {
+            res.status(400).json({
+                type: "Not Found",
+                msg: "Wrong Login Details"
+            })
+        }
+
+        let match = await staff.compareUserPassword(login.password, staff.password);
+        if (match) {
+            let token = await staff.generateJwtToken({
+                staff
+            }, "secret", {
+                expiresIn: 604800
+            })
+
+            if (token) {
+                res.status(200).json({
+                    success: true,
+                    token: token,
+                    userCredentials: staff
+                })
+            }
+        } else {
+            res.status(400).json({
+                type: "Not Found",
+                msg: "Wrong Login Details"
+            })
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({
+            type: "Something Went Wrong",
+            msg: err
+        })
+    }
+};

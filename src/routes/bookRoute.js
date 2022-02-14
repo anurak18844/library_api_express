@@ -7,10 +7,12 @@ app.get("/", bookController.getBooks);
 
 app.get("/:id",bookController.getBookById);
 
-app.post("/", bookController.addBook);
+app.get("/id/:id",bookController.getBookByBookId);
 
-app.put("/:id", bookController.editWholeBook);
+app.post("/", auth,bookController.addBook);
 
-app.delete("/:id", bookController.deleteBook);
+app.put("/:id", auth,bookController.editWholeBook);
+
+app.delete("/:id", auth,bookController.deleteBook);
 
 module.exports = app;

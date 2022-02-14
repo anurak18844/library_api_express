@@ -75,3 +75,13 @@ exports.deleteBook = async (req,res)=>{
     });
 };
 
+exports.getBookByBookId = async (req,res)=>{
+    Book.findOne({book_id: req.params.id})   // db.product.find()
+    .exec((err,data)=>{
+        res.status(200).json({
+            msg: "OK",
+            data: data
+        });
+    });
+};
+

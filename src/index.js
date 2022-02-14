@@ -8,6 +8,7 @@ const categoryRoute = require("./routes/categoryRoute");
 const memberRoute = require("./routes/memberRoute");
 const staffRoute = require("./routes/staffRoute");
 const bookRoute = require("./routes/bookRoute");
+const borrowRoute = require("./routes/borrowRoute")
 
 const app = express();
 app.use(cors());
@@ -19,6 +20,7 @@ app.use("/category", categoryRoute);
 app.use("/member", memberRoute);
 app.use("/book", bookRoute);
 app.use("/staff", staffRoute);
+app.use("/borrow", borrowRoute);
 
 app.get("/",(req, res)=>{
     res.send("Hello World");
